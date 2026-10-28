@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saint Patrick's Day — The Complete Story</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,300..800&family=Uncial+Antiqua&display=swap" rel="stylesheet">
+<style>
+:root{
+  --forest:#06381f;--pine:#0a2415;--moss:#123a24;
+  --emerald:#169b62;--sham:#2fbf71;
+  --gold:#d4af37;--gold-bright:#f0c040;
+  --cream:#f2ead8;--ink:#1a2618;--orange:#ff8b3d;--blue:#33418f;
+  --line-d:rgba(242,234,216,.14);--line-l:rgba(26,38,24,.14);
+  --ease:cubic-bezier(.16,1,.3,1);--snap:cubic-bezier(.76,0,.24,1);--spring:cubic-bezier(.34,1.56,.64,1);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{background:var(--forest);color:var(--cream);font-family:'DM Sans',system-ui,sans-serif;font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+::selection{background:var(--emerald);color:#fff}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+
+#tricolor{position:fixed;top:0;left:0;right:0;height:3px;z-index:57;display:flex;pointer-events:none}
+#tricolor i{flex:1}
+#tricolor i:nth-child(1){background:#169b62}
+#tricolor i:nth-child(2){background:#f2ead8}
+#tricolor i:nth-child(3){background:#ff8b3d}
+
+#grain{position:fixed;inset:-60px;z-index:45;pointer-events:none;opacity:.06;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grainShift 1.2s steps(5) infinite}
+@keyframes grainShift{0%{transform:translate(0,0)}20%{transform:translate(-15px,8px)}40%{transform:translate(10px,-14px)}60%{transform:translate(-8px,-6px)}80%{transform:translate(14px,10px)}100%{transform:translate(0,0)}}
+#vig{position:fixed;inset:0;z-index:44;pointer-events:none;background:radial-gradient(ellipse 120% 90% at 50% 45%,transparent 50%,rgba(0,0,0,.45) 100%)}
+#fx{position:fixed;inset:0;z-index:40;pointer-events:none}
+
+/* ===== TRANSITION OVERLAYS ===== */
+#curtain{position:fixed;inset:0;z-index:62;display:flex;pointer-events:none}
+#curtain .panel{flex:1;transform:translateY(-103%);background:linear-gradient(180deg,var(--moss),var(--pine) 55%,var(--forest));border-right:1px solid rgba(212,175,55,.1);transition:transform .65s var(--snap);position:relative;overflow:hidden}
+#curtain .panel::after{content:"";position:absolute;left:50%;top:50%;width:24px;height:24px;opacity:.06;transform:translate(-50%,-50%);background:var(--sham);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3Cpath d='M75 78C55 48 22 58 30 82C36 99 62 96 75 78Z'/%3E%3Cpath d='M75 78C95 48 128 58 120 82C114 99 88 96 75 78Z'/%3E%3Cpath d='M75 78C45 78 45 112 66 112C80 112 80 92 75 78Z'/%3E%3C/svg%3E") center/contain no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3Cpath d='M75 78C55 48 22 58 30 82C36 99 62 96 75 78Z'/%3E%3Cpath d='M75 78C95 48 128 58 120 82C114 99 88 96 75 78Z'/%3E%3Cpath d='M75 78C45 78 45 112 66 112C80 112 80 92 75 78Z'/%3E%3C/svg%3E") center/contain no-repeat}
+#curtain .panel:nth-child(1){transition-delay:0s}#curtain .panel:nth-child(2){transition-delay:.04s}#curtain .panel:nth-child(3){transition-delay:.08s}#curtain .panel:nth-child(4){transition-delay:.12s}#curtain .panel:nth-child(5){transition-delay:.16s}#curtain .panel:nth-child(6){transition-delay:.2s}#curtain .panel:nth-child(7){transition-delay:.24s}
+#curtain.cover .panel{transform:translateY(0)}
+#curtain.reveal .panel{transform:translateY(103%)}
+#curtain.snap .panel{transition:none}
+
+#wiper{position:fixed;top:-12%;bottom:-12%;left:-45%;width:190%;z-index:62;pointer-events:none;background:linear-gradient(100deg,var(--sham),var(--emerald) 28%,var(--pine) 68%,var(--forest));transform:translateX(-120%) skewX(-14deg)}
+#wiper::before{content:"";position:absolute;top:0;bottom:0;right:0;width:4px;background:linear-gradient(var(--gold),#fff,var(--gold));box-shadow:0 0 30px 3px rgba(212,175,55,.8)}
+#wiper.go{animation:wipeGo 1.1s var(--snap) forwards}
+@keyframes wipeGo{to{transform:translateX(120%) skewX(-14deg)}}
+#wiper.snap{animation:none}
+
+#gate{position:fixed;inset:0;z-index:62;pointer-events:none}
+#gate i{position:absolute;top:0;bottom:0;width:50.5%;background:linear-gradient(180deg,var(--moss),var(--forest) 82%);transition:transform .6s var(--snap)}
+#gate i.l{left:0;transform:translateX(-102%)}#gate i.r{right:0;transform:translateX(102%)}
+#gate i.r::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gold);box-shadow:0 0 20px rgba(212,175,55,.8)}
+#gate.cover i{transform:none}
+
+#slats{position:fixed;inset:0;z-index:62;display:flex;flex-direction:column;pointer-events:none}
+#slats i{flex:1;background:linear-gradient(90deg,var(--pine),var(--moss));transition:transform .55s var(--snap);box-shadow:inset 0 -1px 0 rgba(212,175,55,.2)}
+#slats i:nth-child(odd){transform:translateX(-103%)}#slats i:nth-child(even){transform:translateX(103%)}
+#slats i:nth-child(2){transition-delay:.04s}#slats i:nth-child(3){transition-delay:.08s}#slats i:nth-child(4){transition-delay:.12s}#slats i:nth-child(5){transition-delay:.16s}
+#slats.cover i{transform:none}
+
+#flashfx{position:fixed;inset:0;z-index:63;opacity:0;pointer-events:none;background:radial-gradient(circle at 50% 48%,#fffbe8,var(--gold) 34%,transparent 72%)}
+#flashfx.go{animation:flashGo .65s ease-out forwards}
+@keyframes flashGo{0%{opacity:0}14%{opacity:1}100%{opacity:0}}
+#flashfx.snap{animation:none}
+
+/* ===== CHROME ===== */
+#top{position:fixed;top:6px;left:0;right:0;z-index:55;display:flex;justify-content:space-between;align-items:center;padding:16px 28px;mix-blend-mode:difference;color:#fff}
+.brand{display:flex;align-items:center;gap:10px;font-family:'Uncial Antiqua',serif;font-size:13px;letter-spacing:.14em}
+.brand svg{width:18px;height:18px;fill:currentColor;animation:spinSham 16s linear infinite}
+@keyframes spinSham{to{transform:rotate(360deg)}}
+.brand small{font-family:'DM Sans';font-size:10px;letter-spacing:.28em;opacity:.65}
+
+#dots{position:fixed;right:20px;top:50%;transform:translateY(-50%);z-index:55;display:flex;flex-direction:column;gap:0;mix-blend-mode:difference}
+#dots button{width:44px;height:44px;display:flex;align-items:center;justify-content:center;position:relative;background:none;border:none;cursor:pointer}
+#dots button::before{content:"";width:8px;height:8px;border-radius:50%;background:rgba(242,234,216,.4);transition:all .4s var(--ease)}
+#dots button:hover::before{background:rgba(242,234,216,.75);transform:scale(1.4)}
+#dots button.on::before{background:var(--gold-bright);transform:scale(1.6);box-shadow:0 0 10px rgba(240,192,64,.7)}
+#dots button span{position:absolute;right:44px;top:50%;transform:translateY(-50%) translateX(6px);font-size:10px;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;opacity:0;transition:all .3s;pointer-events:none;color:var(--cream);background:rgba(6,24,13,.85);padding:4px 10px;border-radius:4px;mix-blend-mode:normal}
+#dots button:hover span{opacity:1;transform:translateY(-50%) translateX(0)}
+
+#bar{position:fixed;left:0;bottom:0;height:3px;width:0;z-index:55;background:linear-gradient(90deg,var(--emerald),var(--gold));transition:width .7s var(--ease);box-shadow:0 0 12px rgba(212,175,55,.4)}
+#hint{position:fixed;left:26px;bottom:26px;z-index:55;font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.5;transition:opacity .8s;mix-blend-mode:difference;color:#fff}
+#hint b{color:var(--gold);font-weight:700}#hint.gone{opacity:0}
+
+#ctrl{position:fixed;right:22px;bottom:22px;z-index:56;display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:999px;background:rgba(5,20,12,.85);border:1px solid rgba(212,175,55,.35);box-shadow:0 14px 40px rgba(0,0,0,.45),inset 0 1px 0 rgba(242,234,216,.06);backdrop-filter:blur(8px)}
+#ctrl button{position:relative;width:52px;height:52px;border-radius:50%;border:1px solid rgba(212,175,55,.45);color:var(--gold);display:flex;align-items:center;justify-content:center;background:rgba(212,175,55,.06);transition:background .35s,color .35s,box-shadow .35s}
+#ctrl button svg.arr{width:20px;height:20px;stroke:currentColor;stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round;transition:transform .35s var(--ease)}
+#ctrl button:hover{background:var(--gold);color:var(--forest);box-shadow:0 0 24px rgba(212,175,55,.5)}
+#ctrl #next:hover svg.arr{transform:translateX(3px)}#ctrl #prev:hover svg.arr{transform:translateX(-3px)}
+#ctrl button:active{transform:scale(.92)}
+#ctrl .mid{display:flex;flex-direction:column;align-items:center;min-width:52px;line-height:1}
+#ctrl .mid b{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:700;color:var(--cream);font-variant-numeric:tabular-nums}
+#ctrl .mid small{font-size:8px;letter-spacing:.3em;text-transform:uppercase;opacity:.45;color:var(--cream);margin-top:3px}
+#ctrl .ring{position:absolute;inset:-5px;transform:rotate(-90deg);pointer-events:none}
+#ctrl .ring circle{fill:none;stroke:var(--sham);stroke-width:2;stroke-linecap:round;transition:stroke-dashoffset .7s var(--ease)}
+
+/* ===== LOADER ===== */
+#load{position:fixed;inset:0;z-index:100;background:var(--forest);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;transition:opacity .8s ease,visibility .8s}
+#load.done{opacity:0;visibility:hidden}
+#load svg{width:100px;height:100px;overflow:visible}
+#load svg path{fill:none;stroke:var(--sham);stroke-width:5;stroke-linecap:round;stroke-dasharray:400;stroke-dashoffset:400;animation:drawSham 1.8s var(--ease) forwards}
+#load svg path:nth-child(2){animation-delay:.12s;stroke:var(--emerald)}
+#load svg path:nth-child(3){animation-delay:.24s;stroke:var(--gold)}
+#load svg path:nth-child(4){animation-delay:.4s;stroke:var(--gold)}
+@keyframes drawSham{to{stroke-dashoffset:0}}
+#pct{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:400;font-variant-numeric:tabular-nums}
+#load small{font-size:11px;letter-spacing:.3em;text-transform:uppercase;opacity:.45}
+
+/* ===== SLIDES ===== */
+#deck{position:relative;z-index:2;height:100%}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;visibility:hidden;z-index:1;padding:90px 6vw 80px;overflow-y:auto;scrollbar-width:none}
+.slide::-webkit-scrollbar{display:none}
+.slide.is-active{visibility:visible;z-index:3}
+.slide.is-exit{visibility:visible;z-index:2}
+.slide::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--bg,var(--forest))}
+.slide::after{content:"";position:absolute;inset:16px;border:1px solid var(--line);pointer-events:none;opacity:.55}
+.slide[data-theme="cream"]{--bg:radial-gradient(130% 100% at 50% 0%,#f8f2e3,var(--cream) 55%,#e5dabd);color:var(--ink);--line:var(--line-l);--mut:rgba(26,38,24,.7)}
+.slide[data-theme="dark"]{--bg:radial-gradient(130% 130% at 72% 8%,#0a2a18,var(--forest) 62%);color:var(--cream);--line:var(--line-d);--mut:rgba(242,234,216,.65)}
+.slide[data-theme="green"]{--bg:linear-gradient(160deg,#0b3d24,#062015 70%);color:var(--cream);--line:var(--line-d);--mut:rgba(242,234,216,.65)}
+
+/* ===== TRANSITIONS (lift / slider / flip / scalefade REBUILT) ===== */
+@keyframes softOut{to{opacity:0;transform:scale(1.04)}}
+@keyframes irisIn{from{clip-path:circle(0% at 50% 60%);opacity:.5}to{clip-path:circle(145% at 50% 60%);opacity:1}}
+.enter-iris{animation:irisIn 1.1s var(--ease) both}.exit-iris{animation:softOut .85s ease both}
+
+/* REBUILT: cinematic blur-rise */
+@keyframes liftIn{from{opacity:0;transform:translateY(90px) scale(.97);filter:blur(10px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes liftOut{to{opacity:0;transform:translateY(-60px) scale(.98);filter:blur(8px)}}
+.enter-lift{animation:liftIn 1.05s var(--ease) both}.exit-lift{animation:liftOut .7s var(--ease) both}
+
+@keyframes waveIn{0%{clip-path:polygon(0 0,-12% 0,-12% 20%,-12% 40%,-12% 60%,-12% 80%,-12% 100%,0 100%)}45%{clip-path:polygon(0 0,44% 0,58% 20%,36% 40%,60% 60%,38% 80%,52% 100%,0 100%)}100%{clip-path:polygon(0 0,124% 0,138% 20%,116% 40%,140% 60%,118% 80%,132% 100%,0 100%)}}
+.enter-wave{animation:waveIn 1.2s ease-in-out both}.exit-wave{animation:softOut .85s ease both}
+
+@keyframes zoomIn{from{opacity:0;transform:scale(.82)}to{opacity:1;transform:none}}
+@keyframes zoomOut{to{opacity:0;transform:scale(1.6);filter:blur(10px)}}
+.enter-zoom{animation:zoomIn 1s var(--ease) both}.exit-zoom{z-index:5;animation:zoomOut .75s var(--ease) both}
+
+@keyframes spinIn{from{opacity:0;transform:perspective(1400px) rotateY(-24deg) translateX(10%)}to{opacity:1;transform:none}}
+@keyframes spinOut{to{opacity:0;transform:perspective(1400px) rotateY(22deg) translateX(-12%) scale(.92)}}
+.enter-spin{animation:spinIn 1s var(--ease) both;transform-origin:left center}.exit-spin{z-index:5;animation:spinOut .75s var(--ease) both;transform-origin:right center}
+
+/* REBUILT: page-unfold in 3D */
+@keyframes unfoldIn{from{opacity:0;transform:perspective(1400px) rotateX(-62deg)}to{opacity:1;transform:perspective(1400px) rotateX(0)}}
+@keyframes unfoldOut{to{opacity:0;transform:perspective(1400px) rotateX(58deg) translateY(-4%)}}
+.enter-flip{animation:unfoldIn 1.05s var(--ease) both;transform-origin:50% 100%}
+.exit-flip{animation:unfoldOut .8s var(--ease) both;transform-origin:50% 0%}
+
+/* REBUILT: deck-push with depth */
+@keyframes pushIn{from{opacity:0;transform:translateX(72%) scale(.96)}to{opacity:1;transform:none}}
+@keyframes pushOut{to{opacity:0;transform:translateX(-38%) scale(.93)}}
+.enter-slider{animation:pushIn 1s var(--ease) both}.exit-slider{animation:pushOut .8s var(--ease) both}
+
+/* REBUILT: glow-bloom for the finale */
+@keyframes bloomIn{from{opacity:0;transform:scale(1.14);filter:blur(16px) brightness(1.6)}to{opacity:1;transform:scale(1);filter:blur(0) brightness(1)}}
+@keyframes bloomOut{to{opacity:0;transform:scale(.94);filter:blur(10px)}}
+.enter-scalefade{animation:bloomIn 1.1s var(--ease) both}.exit-scalefade{animation:bloomOut .75s var(--ease) both}
+
+@keyframes popIn{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1)}}
+.enter-pop{animation:popIn .6s var(--spring) both}
+
+.ghost{position:absolute;right:-1vw;top:2vh;z-index:0;pointer-events:none;user-select:none;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:42vh;line-height:1;color:transparent;-webkit-text-stroke:1.5px var(--line);opacity:.4}
+
+/* ===== TYPOGRAPHY ===== */
+.kicker{display:flex;align-items:center;gap:12px;font-size:12px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;min-height:14px}
+.kicker::before{content:"";width:26px;height:14px;flex:none;border-radius:2px;
+  background:linear-gradient(90deg,#169b62 33.3%,#f4ecdc 33.3% 66.6%,#ff8b3d 66.6%);
+  box-shadow:0 1px 5px rgba(0,0,0,.3)}
+h1,h2{font-family:'Cormorant Garamond',serif;font-weight:600;line-height:1.05;letter-spacing:-.01em}
+h2{font-size:clamp(2.1rem,5.2vw,4.4rem);margin-bottom:20px}
+.slide[data-theme="dark"] h2,.slide[data-theme="green"] h2{text-shadow:0 2px 30px rgba(0,0,0,.28)}
+h2 em{font-style:italic;color:var(--emerald)}
+.slide[data-theme="cream"] h2 em{color:var(--emerald)}
+.unq{font-family:'Uncial Antiqua',serif;font-weight:400;letter-spacing:.02em}
+.lead{font-size:clamp(1.05rem,1.5vw,1.3rem);line-height:1.75;max-width:58ch;color:var(--mut)}
+.lead b{color:inherit;font-weight:700}
+.truth{color:var(--sham);font-weight:800}
+.slide[data-theme="cream"] .truth{color:var(--emerald)}
+.foot{margin-top:24px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.4}
+
+.dc::first-letter{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:3em;float:left;line-height:.82;padding:.06em .12em 0 0;color:var(--gold)}
+.slide[data-theme="cream"] .dc::first-letter{color:var(--emerald)}
+
+.uu{position:relative;display:inline-block}
+.uu svg{position:absolute;left:-2%;bottom:-.15em;width:104%;height:.4em;overflow:visible}
+.uu path{fill:none;stroke:var(--gold);stroke-width:4;stroke-linecap:round;stroke-dasharray:420;stroke-dashoffset:420}
+.slide[data-theme="cream"] .uu path{stroke:var(--emerald)}
+.slide.is-active .uu path{animation:drawU 1s var(--ease) .9s forwards}
+@keyframes drawU{to{stroke-dashoffset:0}}
+
+.badge{position:absolute;right:6vw;bottom:80px;width:120px;height:120px;animation:spinSham 28s linear infinite;opacity:.8;pointer-events:none}
+.badge text{font:700 9.5px 'DM Sans',sans-serif;letter-spacing:3.2px;fill:var(--gold)}
+.badge .mid-icon{font-size:20px;fill:var(--sham)}
+
+#s1 h1,#s20 h2{position:relative;overflow:hidden}
+#s1 h1::after,#s20 h2::after{content:"";position:absolute;top:-10%;bottom:-10%;left:0;width:16%;pointer-events:none;opacity:0;background:linear-gradient(105deg,transparent,rgba(244,238,220,.45),transparent);transform:skewX(-18deg) translateX(-260%)}
+#s1.is-active h1::after{animation:tshine 1.4s ease 1s both}
+#s20.is-active h2::after{animation:tshine 1.4s ease .9s both}
+@keyframes tshine{0%{opacity:0;transform:skewX(-18deg) translateX(-260%)}10%{opacity:1}100%{opacity:0;transform:skewX(-18deg) translateX(900%)}}
+
+/* ===== ENTRANCE ANIMATIONS ===== */
+[data-anim]{opacity:0}
+.slide.is-active [data-anim]{animation:var(--an,rise) .95s var(--ease) forwards;animation-delay:var(--d,0s)}
+@keyframes rise{from{opacity:0;transform:translateY(50px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes fromLeft{from{opacity:0;transform:translateX(-60px)}to{opacity:1;transform:none}}
+@keyframes fromRight{from{opacity:0;transform:translateX(60px)}to{opacity:1;transform:none}}
+@keyframes zoomSm{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
+@keyframes dropIn{from{opacity:0;transform:translateY(-40px) rotate(-2deg)}to{opacity:1;transform:none}}
+@keyframes flipUp{from{opacity:0;transform:perspective(900px) rotateX(50deg) translateY(30px)}to{opacity:1;transform:none}}
+@keyframes bouncePop{0%{opacity:0;transform:scale(.5) translateY(14px)}60%{opacity:1;transform:scale(1.08) translateY(-2px)}100%{opacity:1;transform:none}}
+[data-anim="fade"]{--an:fade}[data-anim="left"]{--an:fromLeft}[data-anim="right"]{--an:fromRight}
+[data-anim="zoom"]{--an:zoomSm}[data-anim="drop"]{--an:dropIn}[data-anim="flip"]{--an:flipUp}
+[data-anim="pop"]{--an:bouncePop}
+
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.06em;margin-bottom:-.06em}
+.ch{display:inline-block;transform:translateY(120%) rotate(8deg);opacity:0;transition:transform 1s var(--ease),opacity .5s ease;transition-delay:calc(var(--i)*.028s)}
+.slide.is-active .ch{transform:none;opacity:1}
+
+.kb{overflow:hidden;position:relative}
+.kb img{width:100%;height:100%;object-fit:cover;animation:kburns 24s ease-in-out infinite alternate}
+@keyframes kburns{from{transform:scale(1)}to{transform:scale(1.12) translate(-2%,1.5%)}}
+.kb::after{content:"";position:absolute;top:0;bottom:0;left:0;width:22%;pointer-events:none;opacity:0;background:linear-gradient(105deg,transparent,rgba(255,255,255,.22),transparent);transform:skewX(-18deg) translateX(-180%);transition:opacity .3s}
+.frame:hover .kb::after{opacity:1;animation:kbshine .9s var(--ease) both}
+@keyframes kbshine{to{transform:skewX(-18deg) translateX(620%)}}
+
+.reveal{clip-path:inset(0 100% 0 0)}
+.slide.is-active .reveal{animation:revClip 1.2s var(--ease) .15s both}
+@keyframes revClip{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+
+.frame{position:relative;box-shadow:0 28px 56px rgba(0,0,0,.35);transition:box-shadow .45s var(--ease);will-change:transform}
+.frame:hover{box-shadow:0 36px 70px rgba(0,0,0,.5),0 0 0 1px rgba(212,175,55,.35)}
+.frame .cap{font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.5;margin-top:10px;line-height:1.6}
+.tape::before,.tape::after{content:"";position:absolute;width:84px;height:24px;background:rgba(212,175,55,.28);top:-12px;z-index:3;box-shadow:0 2px 5px rgba(0,0,0,.12)}
+.tape::before{left:-24px;transform:rotate(-36deg)}
+.tape::after{right:-24px;transform:rotate(36deg)}
+
+.floaty{animation:floaty 7s ease-in-out infinite}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(var(--fr,0deg))}50%{transform:translateY(-10px) rotate(calc(var(--fr,0deg) + 1.2deg))}}
+
+/* ===== S1 ===== */
+#s1{align-items:flex-start;justify-content:center;padding-bottom:80px}
+#s1::after{display:none}
+#s1 .ring{position:absolute;right:-14vmin;top:-14vmin;width:72vmin;height:72vmin;opacity:.12;animation:spinSham 95s linear infinite}
+#s1 .glow{position:absolute;left:-18vmin;bottom:-28vmin;width:76vmin;height:76vmin;border-radius:50%;background:radial-gradient(circle,rgba(47,191,113,.25),transparent 65%);filter:blur(12px);animation:breathe 9s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:scale(1);opacity:.8}50%{transform:scale(1.16);opacity:1}}
+#s1 .eyebrow{font-size:12px;letter-spacing:.45em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+#s1 .gael{font-size:clamp(1.1rem,2.4vw,1.9rem);color:var(--sham);margin-bottom:6px}
+#s1 h1{font-size:clamp(3rem,12vw,10.5rem);font-weight:700;text-transform:uppercase;letter-spacing:-.03em}
+#s1 .sub{margin-top:26px;font-size:clamp(1.05rem,1.7vw,1.35rem);max-width:46ch;line-height:1.75;color:var(--mut)}
+#s1 .meta{margin-top:12px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.45}
+.minis{position:absolute;right:5vw;top:14%;height:70%;width:200px;pointer-events:none}
+.minis figure{position:absolute;right:0;width:175px;background:var(--cream);padding:8px 8px 26px;box-shadow:0 18px 40px rgba(0,0,0,.4);transform:rotate(var(--r,0deg))}
+.minis img{height:112px;width:100%;object-fit:cover}
+.minis figcaption{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:11px;color:#4a5a4e;margin-top:6px}
+.mq{position:absolute;left:0;right:0;bottom:0;border-top:1px solid var(--line);overflow:hidden;padding:12px 0;background:rgba(0,0,0,.2)}
+.mq-track{display:flex;gap:44px;width:max-content;animation:mqScroll 28s linear infinite;font-family:'Uncial Antiqua',serif;font-size:12px;letter-spacing:.2em;color:var(--sham)}
+.mq-track i{font-style:normal;color:var(--gold)}
+@keyframes mqScroll{to{transform:translateX(-50%)}}
+
+/* ===== LAYOUTS ===== */
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:5vw;align-items:center;width:100%}
+
+/* FIX: portrait montage tiles so statues are never cut in half */
+.montage{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:26px}
+.montage figure{position:relative;overflow:hidden;aspect-ratio:3/4;box-shadow:0 14px 30px rgba(0,0,0,.18);transition:transform .5s var(--ease)}
+.montage figure:hover{transform:translateY(-6px)}
+.montage img{width:100%;height:100%;object-fit:cover;object-position:50% 38%;transition:transform .8s var(--ease)}
+.montage figure:hover img{transform:scale(1.08)}
+.montage .n{position:absolute;top:8px;left:8px;background:var(--gold);color:var(--forest);font-family:'Cormorant Garamond',serif;font-weight:700;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;box-shadow:0 3px 8px rgba(0,0,0,.3);z-index:2}
+.montage figcaption{position:absolute;bottom:0;left:0;right:0;background:rgba(6,24,13,.72);color:var(--cream);font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:6px 9px;z-index:2}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:26px}
+.card{border:1px solid var(--line);padding:20px;position:relative;overflow:hidden;background:rgba(255,255,255,.03);transition:transform .5s var(--ease),border-color .4s,background .4s}
+.slide[data-theme="cream"] .card{background:rgba(26,38,24,.03)}
+.card:hover{transform:translateY(-5px);border-color:var(--gold);background:rgba(212,175,55,.06)}
+.card .yr{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--gold);display:block;margin-bottom:8px}
+.slide[data-theme="cream"] .card .yr{color:var(--emerald)}
+.card p{font-size:15px;line-height:1.65;color:var(--mut)}
+.card::after{content:"";position:absolute;left:0;top:0;width:3px;height:0;background:var(--gold);transition:height .5s var(--ease)}
+.card:hover::after{height:100%}
+
+.tl{position:relative;margin-top:28px;padding-left:34px;max-width:640px}
+.tl .line{position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--gold),var(--emerald),transparent);transform:scaleY(0);transform-origin:top;transition:transform 2.2s var(--ease) .3s}
+.slide.is-active .tl .line{transform:scaleY(1)}
+.tl-item{position:relative;padding:0 0 20px}
+.tl-item::before{content:"";position:absolute;left:-32px;top:7px;width:12px;height:12px;border-radius:50%;background:var(--forest);border:2px solid var(--gold);transform:scale(0);transition:transform .5s var(--spring) var(--d,0s)}
+.slide.is-active .tl-item::before{transform:scale(1)}
+.tl-item .yr{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:19px;color:var(--gold);margin-right:12px}
+.tl-item p{display:inline;font-size:15px;line-height:1.7;color:var(--mut)}
+.tl-item p b{color:inherit}
+
+.polaroids{position:relative;height:420px}
+.polaroids .pol{position:absolute;width:min(78%,340px);background:var(--cream);padding:10px 10px 34px;color:var(--ink);box-shadow:0 20px 46px rgba(0,0,0,.35)}
+.polaroids .pol img{width:100%;height:240px;object-fit:cover}
+.polaroids .pol figcaption{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;margin-top:9px;color:#4a5a4e}
+.polaroids .pol.small{width:min(56%,240px)}
+.polaroids .pol.small img{height:150px}
+.pol-solo{background:var(--cream);padding:10px 10px 34px;color:var(--ink);box-shadow:0 20px 46px rgba(0,0,0,.4);max-width:280px;margin-left:auto}
+.pol-solo img{width:100%;height:300px;object-fit:cover}
+.pol-solo figcaption{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;margin-top:9px;color:#4a5a4e}
+
+.sw-row{display:flex;align-items:stretch;gap:16px;margin:26px 0 8px;flex-wrap:wrap}
+.sw{width:185px;height:115px;position:relative;display:flex;align-items:flex-end;padding:12px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:#fff;box-shadow:0 14px 30px rgba(0,0,0,.3);transition:transform .5s var(--ease)}
+.sw:hover{transform:translateY(-5px) rotate(-1deg)}
+.sw small{display:block;font-weight:400;letter-spacing:.05em;text-transform:none;opacity:.8;margin-top:3px;font-size:11px}
+.sw.blue{background:linear-gradient(150deg,#33418f,#1d2766)}
+.sw.green{background:linear-gradient(150deg,#2fbf71,#0e6b41)}
+.sw-arrow{align-self:center;font-size:24px;color:var(--gold);animation:nudge 1.8s ease-in-out infinite}
+@keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(7px)}}
+
+.sham-wrap{display:flex;align-items:center;gap:24px;margin-top:22px;flex-wrap:wrap}
+.sham-svg{width:140px;height:140px;flex:none;filter:drop-shadow(0 8px 20px rgba(47,191,113,.35))}
+.sham-svg .leaf{fill:var(--sham);transform-origin:75px 78px;transition:fill .35s,transform .5s var(--ease);cursor:pointer}
+.sham-svg .leaf:hover{fill:var(--gold);transform:scale(1.12)}
+.sham-svg .stem{stroke:var(--emerald);stroke-width:5;fill:none;stroke-linecap:round}
+.sham-note{font-size:15px;line-height:1.7;color:var(--mut);max-width:38ch}
+.sham-note b{color:var(--gold)}
+
+.snake-box{position:relative;display:inline-block;width:100%}
+.stamp{position:absolute;right:-10px;top:-18px;border:3px solid var(--orange);color:var(--orange);font-weight:800;letter-spacing:.18em;font-size:12px;padding:9px 14px;transform:rotate(-9deg);text-transform:uppercase;border-radius:6px;opacity:0;background:rgba(255,139,61,.08);z-index:6}
+.slide.is-active .stamp{animation:stampIn .5s var(--spring) 1.4s forwards}
+@keyframes stampIn{from{opacity:0;transform:rotate(-9deg) scale(1.6)}to{opacity:.95;transform:rotate(-9deg) scale(1)}}
+
+.pc-wrap{position:relative;display:inline-block;width:100%}
+.postmark{width:118px;height:118px;border:2px dashed rgba(212,175,55,.85);border-radius:50%;display:flex;align-items:center;justify-content:center;transform:rotate(-12deg);color:var(--gold);font-size:10px;letter-spacing:.16em;text-transform:uppercase;text-align:center;line-height:1.6;font-weight:700;position:absolute;right:-14px;bottom:-14px;z-index:5;background:rgba(6,24,13,.6);backdrop-filter:blur(2px)}
+
+.pcs{position:relative;height:400px;margin-top:8px}
+.pc{position:absolute;width:245px;background:var(--cream);padding:10px 10px 32px;color:var(--ink);box-shadow:0 16px 40px rgba(0,0,0,.3);transform:rotate(var(--r,0deg)) translateY(50px);opacity:0;transition:transform .8s var(--ease) var(--d,0s),opacity .6s ease var(--d,0s),box-shadow .4s}
+.slide.is-active .pc{opacity:1;transform:rotate(var(--r,0deg)) translateY(0)}
+.pc:hover{transform:rotate(0deg) translateY(-10px) scale(1.04)!important;z-index:9;box-shadow:0 30px 65px rgba(0,0,0,.45);transition-delay:0s}
+.pc img{width:100%;height:165px;object-fit:cover}
+.pc figcaption{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:12.5px;margin-top:8px;color:#4a5a4e}
+.pc .pin{position:absolute;top:-8px;left:50%;transform:translateX(-50%);width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ff9d5c,var(--orange) 60%,#a34d13);box-shadow:0 2px 5px rgba(0,0,0,.35)}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:30px}
+.stat{border-top:2px solid var(--gold);padding-top:12px}
+.stat .num{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(1.5rem,2.8vw,2.4rem);color:var(--emerald);font-variant-numeric:tabular-nums;text-shadow:0 0 26px rgba(47,191,113,.3)}
+.slide[data-theme="dark"] .stat .num,.slide[data-theme="green"] .stat .num{color:var(--sham)}
+.stat .lb{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);margin-top:4px;line-height:1.5}
+
+.vidframe{position:relative;border:1px solid var(--line);padding:10px 28px;background:rgba(0,0,0,.3);box-shadow:0 28px 65px rgba(0,0,0,.45)}
+.vidframe::before,.vidframe::after{content:"";position:absolute;top:8px;bottom:8px;width:11px;opacity:.5;background:repeating-linear-gradient(180deg,rgba(242,234,216,.2) 0 8px,transparent 8px 18px)}
+.vidframe::before{left:8px}.vidframe::after{right:8px}
+.vidframe .reel{position:absolute;top:-13px;left:32px;background:var(--gold);color:var(--forest);font-size:9px;font-weight:800;letter-spacing:.22em;padding:4px 11px;text-transform:uppercase;z-index:2}
+.vidframe iframe,.vidframe video{width:100%;aspect-ratio:16/9;display:block;border:0;background:#000}
+.vidcap{font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.5;margin-top:10px;line-height:1.7}
+
+#s16 .bg{position:absolute;inset:0;z-index:-1}
+#s16 .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,16,9,.92),rgba(4,16,9,.7) 45%,rgba(4,16,9,.2))}
+#s16 .panelbox{max-width:600px;border-left:3px solid var(--sham);padding-left:24px}
+.factline{display:flex;gap:14px;margin-top:16px;align-items:flex-start}
+.factline .n{font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--gold);font-size:15px;min-width:24px}
+.factline p{font-size:15px;line-height:1.7;color:var(--mut)}
+.factline p b{color:var(--cream)}
+.strip{display:flex;gap:10px;margin-top:22px}
+.strip figure{flex:1;height:92px;overflow:hidden;position:relative;border:1px solid var(--line)}
+.strip img{width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease)}
+.strip figure:hover img{transform:scale(1.12)}
+.strip figcaption{position:absolute;left:0;right:0;bottom:0;font-size:8px;letter-spacing:.14em;text-transform:uppercase;padding:3px 7px;background:rgba(4,16,9,.7);opacity:.8}
+
+.myths{display:grid;grid-template-columns:1fr;gap:14px;margin-top:26px}
+.myth{border:1px solid var(--line);padding:22px;position:relative;transition:transform .5s var(--ease),box-shadow .5s;background:rgba(255,255,255,.03)}
+.slide[data-theme="cream"] .myth{background:rgba(26,38,24,.03)}
+.myth:hover{transform:translateY(-6px) rotate(-.5deg);box-shadow:0 22px 46px rgba(0,0,0,.18)}
+.myth h3{font-family:'Cormorant Garamond',serif;font-size:22px;margin-bottom:10px;color:var(--emerald)}
+.myth p{font-size:14.5px;line-height:1.7;color:var(--mut)}
+.myth .tag{position:absolute;top:-10px;right:12px;background:var(--gold);color:var(--forest);font-size:9px;font-weight:800;letter-spacing:.18em;padding:3px 9px;text-transform:uppercase}
+
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;max-width:640px}
+.chip{border:1px solid var(--line);padding:9px 16px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;transition:all .35s var(--ease);cursor:default}
+.chip:hover{background:var(--sham);color:var(--forest);border-color:var(--sham);transform:translateY(-3px)}
+
+.flips{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-top:28px;perspective:1200px}
+.flip{height:200px;cursor:pointer}
+.flip-in{position:relative;width:100%;height:100%;transition:transform .85s var(--ease);transform-style:preserve-3d}
+.flip:hover .flip-in,.flip.on .flip-in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:18px;border:1px solid var(--line);border-radius:12px}
+.face.fr{background:rgba(255,255,255,.04)}
+.face.fr .g{font-family:'Uncial Antiqua',serif;font-size:clamp(15px,1.5vw,20px);color:var(--sham);line-height:1.35}
+.face.fr small{margin-top:10px;font-size:10px;letter-spacing:.22em;text-transform:uppercase;opacity:.4}
+.face.bk{background:var(--emerald);color:var(--cream);transform:rotateY(180deg);border-color:var(--emerald)}
+.face.bk .p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;color:var(--gold)}
+.face.bk .m{font-size:13px;line-height:1.55;margin-top:8px;opacity:.85}
+
+#s20{align-items:center;text-align:center;justify-content:center}
+#s20 h2{font-size:clamp(3.2rem,12.5vw,10.5rem);color:var(--sham);text-shadow:0 0 55px rgba(47,191,113,.4)}
+#s20 .joke{font-size:clamp(1rem,1.5vw,1.25rem);color:var(--mut);max-width:52ch;line-height:1.8;margin-top:8px}
+#s20 .joke b{color:var(--gold)}
+.credits{margin-top:38px;display:flex;flex-direction:column;gap:7px;font-size:11px;letter-spacing:.08em;color:var(--mut);max-width:70ch;line-height:1.8}
+#replay{margin-top:26px;border:1px solid var(--gold);color:var(--gold);padding:13px 34px;font-size:12px;letter-spacing:.25em;text-transform:uppercase;transition:all .4s var(--ease)}
+#replay:hover{background:var(--gold);color:var(--forest);box-shadow:0 0 36px rgba(212,175,55,.45)}
+
+@media(max-width:960px){
+  .split{grid-template-columns:1fr;gap:32px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .montage{grid-template-columns:repeat(2,1fr)}
+  .pcs{height:auto;display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .pc{position:static;width:auto;transform:rotate(var(--r))!important}
+  .minis{display:none}
+  .ghost{font-size:28vh}
+  #dots{right:8px}
+  .slide{padding:80px 7vw 95px}
+  .badge{width:90px;height:90px;bottom:105px;right:6vw}
+  .polaroids{height:auto}
+  .polaroids .pol{position:relative;margin-bottom:14px}
+  .pol-solo{margin:0 auto}
+}
+@media(max-width:600px){
+  .flips{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  .montage{grid-template-columns:1fr 1fr}
+  #hint{display:none}
+  .sw{width:100%}
+  .strip{flex-direction:column}
+  .strip figure{height:76px}
+  #ctrl{right:10px;bottom:10px;gap:8px;padding:8px 10px}
+  #ctrl button{width:46px;height:46px}
+  #ctrl .mid{min-width:40px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}
+}
+</style>
+</head>
+<body>
+
+<div id="load">
+  <svg viewBox="0 0 150 150" aria-hidden="true">
+    <path d="M75 78 C 55 48, 22 58, 30 82 C 36 99, 62 96, 75 78 Z"/>
+    <path d="M75 78 C 95 48, 128 58, 120 82 C 114 99, 88 96, 75 78 Z"/>
+    <path d="M75 78 C 45 78, 45 112, 66 112 C 80 112, 80 92, 75 78 Z"/>
+    <path d="M75 80 C 78 100, 74 116, 68 130"/>
+  </svg>
+  <div id="pct">0</div>
+  <small>Loading...</small>
+</div>
+
+<canvas id="fx"></canvas>
+<div id="vig"></div>
+<div id="grain"></div>
+<div id="tricolor" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<div id="curtain" aria-hidden="true"><div class="panel"></div><div class="panel"></div><div class="panel"></div><div class="panel"></div><div class="panel"></div><div class="panel"></div><div class="panel"></div></div>
+<div id="wiper" aria-hidden="true"></div>
+<div id="gate" aria-hidden="true"><i class="l"></i><i class="r"></i></div>
+<div id="slats" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+<div id="flashfx" aria-hidden="true"></div>
+
+<header id="top">
+  <div class="brand">
+    <svg viewBox="0 0 150 150" aria-hidden="true"><path d="M75 78 C 55 48, 22 58, 30 82 C 36 99, 62 96, 75 78 Z M75 78 C 95 48, 128 58, 120 82 C 114 99, 88 96, 75 78 Z M75 78 C 45 78, 45 112, 66 112 C 80 112, 80 92, 75 78 Z M75 80 C 78 100, 74 116, 68 130"/></svg>
+    SAINT PATRICK'S DAY <small>MARCH 17</small>
+  </div>
+</header>
+<nav id="dots" aria-label="Slides"></nav>
+<div id="bar"></div>
+<div id="hint"><b>◀ ▶</b> buttons · <b>← →</b> keys · <b>F</b> fullscreen</div>
+
+<nav id="ctrl" aria-label="Slide navigation">
+  <button id="prev" aria-label="Previous slide"><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <div class="mid"><b id="cNow">01</b><small>of 20</small></div>
+  <button id="next" aria-label="Next slide">
+    <svg class="ring" viewBox="0 0 62 62" aria-hidden="true"><circle id="ringC" cx="31" cy="31" r="28"/></svg>
+    <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+  </button>
+</nav>
+
+<main id="deck">
+
+<!-- 01 · TITLE -->
+<section class="slide" data-theme="dark" id="s1" data-name="Welcome" data-fx="iris">
+  <div class="glow" data-depth="18"></div>
+  <svg class="ring" viewBox="0 0 200 200" data-depth="10" aria-hidden="true"><circle cx="100" cy="100" r="96" fill="none" stroke="#2fbf71" stroke-width="1"/><circle cx="100" cy="100" r="70" fill="none" stroke="#d4af37" stroke-width=".7" stroke-dasharray="4 7"/><circle cx="100" cy="100" r="44" fill="none" stroke="#2fbf71" stroke-width=".7"/><path d="M100 4 v192 M4 100 h192 M32 32 l136 136 M168 32 l-136 136" stroke="#2fbf71" stroke-width=".5"/></svg>
+  <div class="ghost" data-depth="6">17</div>
+  <div class="minis" data-depth="14" data-anim="fade" style="--d:1.1s">
+    <figure style="--r:-7deg;top:6%"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Saint_patrick%27s_day_2013,Dublin,_Images_from_the_streets_02.jpg?width=400" alt="Dublin streets on St Patrick's Day" loading="lazy" decoding="async"><figcaption>Dublin streets</figcaption></figure>
+    <figure style="--r:5deg;top:52%"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Sydney_Opera_House_on_St._Patrick%27s_Day_(41260243671).jpg?width=400" alt="Sydney Opera House lit green" loading="lazy" decoding="async"><figcaption>Sydney goes green</figcaption></figure>
+  </div>
+  <div class="eyebrow" data-anim="fade" style="--d:0s">March 17 · A Day of Celebration</div>
+  <div class="gael unq" data-anim="left" style="--d:.08s">Saint Patrick's Day</div>
+  <h1 data-split style="--d:.15s">THE FULL STORY</h1>
+  <p class="sub" data-anim="rise" style="--d:.5s">A boy was taken from his home. He escaped, came back, and changed a country forever. Today the whole world celebrates his story with green, music, and joy.</p>
+  <div class="meta" data-anim="fade" style="--d:.7s">Real photos · Real footage · Built by hand</div>
+  <svg class="badge" viewBox="0 0 120 120" data-anim="fade" style="--d:.9s" aria-hidden="true"><defs><path id="circ" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs><circle cx="60" cy="60" r="30" fill="none" stroke="#d4af37" stroke-width="1" stroke-dasharray="3 5"/><text><textPath href="#circ">SAINT PATRICKS DAY · MARCH 17 · CELEBRATE ·</textPath></text><text class="mid-icon" x="60" y="67" text-anchor="middle">☘</text></svg>
+  <div class="mq" aria-hidden="true"><div class="mq-track"><span>SLÁINTE ✦ ÉIRINN GO BRÁCH ✦ WEAR GREEN ✦ BE KIND  CÉAD MÍLE FÁILTE ✦ HAVE FUN </span><span>SLÁINTE ✦ ÉIRINN GO BRÁCH ✦ WEAR GREEN ✦ BE KIND  CÉAD MÍLE FÁILTE ✦ HAVE FUN </span></div></div>
+</section>
+
+<!-- 02 · AGENDA (portrait tiles — full statues) -->
+<section class="slide" data-theme="cream" data-name="The Journey" data-fx="lift">
+  <div class="ghost" data-depth="6">02</div>
+  <div class="kicker" data-anim="left" data-scramble>What You Will See</div>
+  <h2><span data-split>A story in </span><em class="uu" data-anim="fade" style="--d:.45s">four parts.<svg viewBox="0 0 120 12" preserveAspectRatio="none" aria-hidden="true"><path d="M3 8 Q 22 3 42 7 T 82 6 T 117 7"/></svg></em></h2>
+  <div class="montage">
+    <figure data-anim="flip" style="--d:.3s"><span class="n">I</span><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Saint_Patrick_Slieve_Patrick_County_Down.jpg?width=600" alt="Monumental statue of Saint Patrick on a hill" loading="lazy" decoding="async"><figcaption>The Man</figcaption></figure>
+    <figure data-anim="flip" style="--d:.42s"><span class="n">II</span><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Shamrock_leaf.jpg?width=600" alt="A shamrock leaf" loading="lazy" decoding="async"><figcaption>The Symbols</figcaption></figure>
+    <figure data-anim="flip" style="--d:.54s"><span class="n">III</span><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Saint_patrick%27s_day_2013,Dublin,_Images_from_the_streets_06.jpg?width=600" alt="Dublin street celebration" loading="lazy" decoding="async"><figcaption>The Celebration</figcaption></figure>
+    <figure data-anim="flip" style="--d:.66s"><span class="n">IV</span><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Chicago_River_dyed_green_for_St._Patrick%27s_Day.jpg?width=600" alt="Chicago River dyed green" loading="lazy" decoding="async"><figcaption>The Living Tradition</figcaption></figure>
+  </div>
+  <p class="lead" data-anim="rise" style="--d:.8s;margin-top:24px;font-size:15px">Every photo in this deck is real — taken by real people, freely shared on Wikimedia Commons.</p>
+</section>
+
+<!-- 03 · THE MAN (portrait frame — full statue visible) -->
+<section class="slide" data-theme="dark" data-name="The Man" data-fx="wipe">
+  <div class="ghost" data-depth="6">03</div>
+  <div class="split">
+    <div>
+      <div class="kicker" data-anim="left" data-scramble>Part One · The Man</div>
+      <h2><span data-split>Patrick was not </span><em class="uu" data-anim="fade" style="--d:.45s">Irish.<svg viewBox="0 0 120 12" preserveAspectRatio="none" aria-hidden="true"><path d="M3 8 Q 22 3 42 7 T 82 6 T 117 7"/></svg></em></h2>
+      <p class="lead dc" data-anim="rise" style="--d:.4s">He was born in Roman Britain around the year 385. His own writings call him Patricius. He did not start life as a saint — he started it as an ordinary boy.</p>
+      <div class="cards" style="grid-template-columns:repeat(2,1fr)">
+        <div class="card" data-anim="flip" style="--d:.6s"><span class="yr">c. 385</span><p>Born in Roman Britain, likely in a family with some standing.</p></div>
+        <div class="card" data-anim="flip" style="--d:.75s"><span class="yr">Faith</span><p>He later became one of the most important missionaries in history.</p></div>
+      </div>
+      <div class="foot" data-anim="fade" style="--d:.9s">Source: Patrick's own Confessio · Britannica</div>
+    </div>
+    <div data-anim="zoom" style="--d:.3s">
+      <div class="frame tape kb reveal" style="height:min(64vh,600px);max-width:430px;margin-left:auto">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Saint_Patrick_Slieve_Patrick_County_Down.jpg?width=1200" alt="Monumental statue of Saint Patrick standing on Slieve Patrick hill, County Down" loading="lazy" decoding="async" style="object-position:50% 35%">
+      </div>
+      <p class="cap" style="max-width:430px;margin-left:auto">The great statue of Patrick on Slieve Patrick, County Down — unmistakably a statue, unmistakably a saint. Photo: Wikimedia Commons.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 04 · CAPTURED -->
+<section class="slide" data-theme="cream" data-name="Captured" data-fx="wave">
+  <div class="ghost" data-depth="6">04</div>
+  <div class="kicker" data-anim="left" data-scramble>The Hard Years</div>
+  <h2 data-split>Taken at sixteen.</h2>
+  <div class="split" style="grid-template-columns:.9fr 1.1fr;align-items:start">
+    <div data-anim="drop" style="--d:.3s">
+      <div class="frame tape" style="transform:rotate(-2deg)">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Stpatrick.jpg?width=1000" alt="Statue of Saint Patrick on the Hill of Tara" loading="lazy" decoding="async">
+        <p class="cap" style="color:#5a6a5e">Patrick on the Hill of Tara — the ancient heart of Ireland. Photo: Wikimedia Commons.</p>
+      </div>
+    </div>
+    <div>
+      <p class="lead" data-anim="rise" style="--d:.3s">Raiders captured him and brought him to Ireland. For six years he herded sheep alone on a mountainside. It was a lonely, difficult time — but it shaped who he would become.</p>
+      <div class="cards" style="grid-template-columns:1fr">
+        <div class="card" data-anim="flip" style="--d:.5s"><span class="yr">Age 16</span><p>Captured and sold into slavery, far from his family.</p></div>
+        <div class="card" data-anim="flip" style="--d:.65s"><span class="yr">6 Years</span><p>Herding sheep in isolation. He turned to prayer and found inner strength.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 · ESCAPE -->
+<section class="slide" data-theme="dark" data-name="Escape" data-fx="spin">
+  <div class="ghost" data-depth="6">05</div>
+  <div class="split">
+    <div>
+      <div class="kicker" data-anim="left" data-scramble>The Escape</div>
+      <h2><span data-split>He ran for his </span><em class="uu" data-anim="fade" style="--d:.45s">freedom.<svg viewBox="0 0 120 12" preserveAspectRatio="none" aria-hidden="true"><path d="M3 8 Q 22 3 42 7 T 82 6 T 117 7"/></svg></em></h2>
+      <p class="lead" data-anim="rise" style="--d:.3s">After six years, Patrick escaped. He travelled about two hundred miles on foot to reach the coast, then found a ship that carried him home. He was free at last.</p>
+      <div class="stats" style="grid-template-columns:repeat(3,1fr)">
+        <div class="stat" data-anim="rise" style="--d:.5s"><div class="num" data-count="200" data-suffix=" miles"></div><div class="lb">Walked on foot to the coast</div></div>
+        <div class="stat" data-anim="rise" style="--d:.65s"><div class="num" data-count="6"></div><div class="lb">Years in captivity</div></div>
+        <div class="stat" data-anim="rise" style="--d:.8s"><div class="num" data-count="1"></div><div class="lb">Ship that carried him home</div></div>
+      </div>
+    </div>
+    <div data-anim="zoom" style="--d:.35s">
+      <div class="frame kb reveal" style="height:min(52vh,480px)">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Church_on_Downpatrick_Head_-_geograph.org.uk_-_242756.jpg?width=1000" alt="Cliffs and church at Downpatrick Head on the Irish coast" loading="lazy" decoding="async">
+      </div>
+      <p class="cap">The wild Irish coast at Downpatrick Head — the sea was his road home. Photo: geograph.org.uk (CC).</p>
+    </div>
+  </div>
+</section>
+
+<!-- 06 · RETURN -->
+<section class="slide" data-theme="cream" data-name="The Return" data-fx="zoom">
+  <div class="ghost" data-depth="6">06</div>
+  <div class="kicker" data-anim="left" data-scramble>The Return</div>
+  <h2 data-split>Then he chose to go back.</h2>
+  <div class="split">
+    <div>
+      <p class="lead dc" data-anim="rise" style="--d:.3s">Back home, Patrick had a dream. He heard the voices of the Irish people calling him to return. So he went back — not as a slave, but as a missionary, to share his faith with the very people among whom he had suffered.</p>
+      <div class="cards" style="grid-template-columns:1fr">
+        <div class="card" data-anim="flip" style="--d:.5s"><span class="yr">The Dream</span><p>A vision of the Irish people asking him to come back and walk among them.</p></div>
+        <div class="card" data-anim="flip" style="--d:.65s"><span class="yr">c. 432</span><p>He returned to Ireland and spent the rest of his life there.</p></div>
+      </div>
+    </div>
+    <div data-anim="zoom" style="--d:.35s">
+      <div class="frame tape" style="transform:rotate(2deg)">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Saint_Patrick%27s_grave_Downpatrick.jpg?width=900" alt="Grave marker of Saint Patrick at Downpatrick" loading="lazy" decoding="async">
+        <p class="cap" style="color:#5a6a5e">His journey ended where it began — tradition says he rests at Downpatrick. Photo: Wikimedia Commons.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 · SHAMROCK -->
+<section class="slide" data-theme="green" data-name="Shamrock" data-fx="iris">
+  <div class="ghost" data-depth="6">07</div>
+  <div class="split">
+    <div>
+      <div class="kicker" data-anim="left" data-scramble>Part Two · The Symbols</div>
+      <h2><span data-split>The little plant with </span><em class="uu" data-anim="fade" style="--d:.45s">three leaves.<svg viewBox="0 0 120 12" preserveAspectRatio="none" aria-hidden="true"><path d="M3 8 Q 22 3 42 7 T 82 6 T 117 7"/></svg></em></h2>
+      <p class="lead" data-anim="rise" style="--d:.3s">Patrick is said to have used the shamrock to explain the idea of the Trinity — three parts, one whole. It became the most famous symbol of Ireland.</p>
+      <div class="sham-wrap">
+        <svg class="sham-svg" viewBox="0 0 150 150" data-anim="zoom" style="--d:.5s" aria-label="Interactive shamrock">
+          <path class="leaf" d="M75 78 C 55 48, 22 58, 30 82 C 36 99, 62 96, 75 78 Z"><title>First leaf</title></path>
+          <path class="leaf" d="M75 78 C 95 48, 128 58, 120 82 C 114 99, 88 96, 75 78 Z"><title>Second leaf</title></path>
+          <path class="leaf" d="M75 78 C 45 78, 45 112, 66 112 C 80 112, 80 92, 75 78 Z"><title>Third leaf</title></path>
+          <path class="stem" d="M75 80 C 78 100, 74 116, 68 130"/>
+        </svg>
+        <p class="sham-note" data-anim="rise" style="--d:.65s">One stem, <b>three leaves</b>. Hover over each leaf to see it light up gold.</p>
+      </div>
+    </div>
+    <div data-anim="zoom" style="--d:.35s">
+      <div class="frame kb reveal" style="height:min(50vh,440px);border-radius:50%;overflow:hidden;box-shadow:0 0 0 8px rgba(47,191,113,.12),0 28px 56px rgba(0,0,0,.4)">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Shamrock_leaf.jpg?width=800" alt="Close-up photograph of a shamrock leaf" loading="lazy" decoding="async">
+      </div>
+      <p class="cap" style="text-align:center">A real shamrock. Photo: Wikimedia Commons.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 08 · WHY GREEN -->
+<section class="slide" data-theme="dark" data-name="Why Green" data-fx="gate">
+  <div class="ghost" data-depth="6">08</div>
+  <div class="split">
+    <div>
+      <div class="kicker" data-anim="left" data-scramble>The Color Story</div>
+      <h2><span data-split>It used to be </span><em class="uu" data-anim="fade" style="--d:.45s">blue.<svg viewBox="0 0 120 12" preserveAspectRatio="none" aria-hidden="true"><path d="M3 8 Q 22 3 42 7 T 82 6 T 117 7"/></svg></em></h2>
+      <p class="lead" data-anim="rise" style="--d:.3s">Early pictures show Patrick in blue. Green took over in the 1790s, when Irish people adopted it as the color of their identity. Ireland's green hills made the choice feel natural.</p>
+      <div class="sw-row">
+        <div class="sw blue" data-anim="left" style="--d:.5s">St Patrick's Blue<small>The original color until the 1790s</small></div>
+        <div class="sw-arrow" data-anim="fade" style="--d:.7s">➜</div>
+        <div class="sw green" data-anim="right" style="--d:.6s">Irish Green<small>The color of identity since 1798</small></div>
+      </div>
+      <p class="lead" data-anim="rise" style="--d:.85s;margin-top:14px;font-size:15px">The song "The Wearing of the Green" helped make the color permanent.</p>
+    </div>
+    <div data-anim="zoom" style="--d:.35s">
+      <div class="frame tape kb reveal" style="height:min(52vh,480px)">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Saint_Patrick%27s_Day_in_Cork,_2024._Images_from_the_Celebration_01.jpg?width=1000" alt="Crowds in green celebrating in Cork, 2024" loading="lazy" decoding="async">
+      </div>
+      <p class="cap">A sea of green — Cork, 2024. Photo: Wikimedia Commons.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 09 · LEPRECHAUN -->
+<section class="slide" data-theme="cream" data-name="Leprechaun" data-fx="slats">
+  <div class="ghost" data-depth="6">09</div>
+  <div class="split">
+    <div>
+      <div class="kicker" data-anim="left" data-scramble>The Myths</div>
+      <h2 data-split>The little shoemaker.</h2>
+      <div class="myths">
+        <div class="myth" data-anim="flip" style="--d:.3s"><span class="tag">Folklore</span><h3>The Leprechaun</h3><p>A tiny fairy shoemaker from Irish legend. The story says that if you catch one and keep your eyes on him, he must show you his hidden gold. But look away for a moment, and he vanishes.</p></div>
+        <div class="myth" data-anim="flip" style="--d:.5s"><span class="tag">The Gold</span><h3>The Pot of Gold</h3><p>Legend places his treasure at the end of a rainbow — a place no one can ever actually reach.</p></div>
+      </div>
+    </div>
+    <div data-anim="zoom" style="--d:.35s">
+      <div class="frame tape" style="transform:rotate(2deg);background:#fff;padding:14px 14px 20px">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Leprechaun_engraving_1858.jpg?width=800" alt="Victorian-era engraving of a leprechaun, 1858" loading="lazy" decoding="async" style="filter:sepia(.3) contrast(1.05)">
+        <p class="cap" style="color:#5a6a5e">A leprechaun as Victorian artists drew him, 1858. Public domain.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 · SNAKES -->
+<section class="slide" data-theme="dark" data-name="The Snakes" data-fx="flip">
+  <div class="ghost" data-depth="6">10</div>
+  <div class="split">
+    <div>
+      <div class="kicker" data-anim="left" data-scramble>Truth Behind the Myth</div>
+      <h2 data-split>Look closely at this snake.</h2>
+      <p class="lead" data-anim="rise" style="--d:.3s">Now here is the surprise: <b class="truth">there are no wild snakes in Ireland. Not one. There never have been.</b> After the last Ice Age, the sea kept every snake out.</p>
+      <div class="cards" style="margin-top:24px">
+        <div class="card" data-anim="flip" style="--d:.5s"><span class="yr">The Legend</span><p>Patrick banished every snake from the island into the sea.</p></div>
+        <div class="card" data-anim="flip" style="--d:.65s"><span class="yr">The Fact</span><p>Ireland never had snakes — so there was nothing to banish.</p></div>
+        <div class="card" data-anim="flip" style="--d:.8s"><span class="yr">The Meaning</span><p>The story likely symbolizes replacing old beliefs with the new faith.</p></div>
+      </div>
+    </div>
+    <div class="snake-box" data-anim="right" style="--d:.4s">
+      <div class="frame tape kb reveal">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/The_Grass_Snake_-_Natrix_natrix.jpg?width=1200" alt="A grass snake (Natrix natrix) lying in a forest clearing" loading="lazy" decoding="async" style="height:min(48vh,420px)">
+      </div>
+      <div class="stamp">0 snakes in Ireland</div>
+      <p class="cap">A grass snake (Natrix natrix) — Wikimedia Commons Picture of the Day. Beautiful, right? You will never meet one in the wild in Ireland.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 11 · MOUNTAIN -->
+<section class="slide" data-theme="cream" data-name="The Mountain" data-fx="lift">
+  <div class="ghost" data-depth="6">11</div>
+  <div class="split">
+    <div>
+      <div class="kicker" data-anim="left" data-scramble>The Holy Mountain</div>
+      <h2 data-split>Forty days on the summit.</h2>
+      <p class="lead dc" data-anim="rise" style="--d:.3s">Patrick is said to have fasted for forty days on the top of Croagh Patrick. Today, thousands of pilgrims still climb it every year, and many make the journey barefoot as an act of devotion.</p>
+      <div class="stats" style="grid-template-columns:repeat(3,1fr)">
+        <div class="stat" data-anim="rise" style="--d:.5s"><div class="num" data-count="40"></div><div class="lb">Days of fasting</div></div>
+        <div class="stat" data-anim="rise" style="--d:.65s"><div class="num" data-count="764" data-suffix=" m"></div><div class="lb">Height of Croagh Patrick</div></div>
+        <div class="stat" data-anim="rise" style="--d:.8s"><div class="num" data-count="1000" data-suffix="+"></div><div class="lb">Years of pilgrimage</div></div>
+      </div>
+    </div>
+    <div data-anim="zoom" style="--d:.35s">
+      <div class="frame tape kb reveal" style="height:min(56vh,520px);max-width:420px;margin-left:auto">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Statue_of_St_Patrick,_Downpatrick_(1)_-_geograph.org.uk_-_542121.jpg?width=1000" alt="Statue of Saint Patrick standing at Downpatrick" loading="lazy" decoding="async" style="object-position:50% 30%">
+      </div>
+      <p class="cap" style="max-width:420px;margin-left:auto">A statue of Patrick standing watch at Downpatrick. His mountain, Croagh Patrick, still draws pilgrims every summer. Photo: geograph.org.uk (CC).</p>
+    </div>
+  </div>
+</section>
+
+<!-- 12 · TIMELINE + POLAROIDS -->
+<section class="slide" data-theme="dark" data-name="Timeline" data-fx="blinds">
+  <div class="ghost" data-depth="6">12</div>
+  <div class="kicker" data-anim="left" data-scramble>Part Three · Through Time</div>
+  <h2 data-split>1,600 years of tradition.</h2>
+  <div class="split" style="grid-template-columns:1.15fr .85fr;align-items:start">
+    <div class="tl">
+      <div class="line"></div>
+      <div class="tl-item" data-anim="rise" style="--d:.3s"><span class="yr">461</span><p>Patrick dies. March 17 becomes his feast day.</p></div>
+      <div class="tl-item" data-anim="rise" style="--d:.45s"><span class="yr">1601</span><p>The first recorded parade takes place in St. Augustine, Florida.</p></div>
+      <div class="tl-item" data-anim="rise" style="--d:.6s"><span class="yr">1762</span><p>Irish soldiers march in New York — the start of the world's largest parade.</p></div>
+      <div class="tl-item" data-anim="rise" style="--d:.75s"><span class="yr">1903</span><p>Ireland makes it an official public holiday.</p></div>
+      <div class="tl-item" data-anim="rise" style="--d:.9s"><span class="yr">1962</span><p>Chicago dyes its river green for the first time.</p></div>
+      <div class="tl-item" data-anim="rise" style="--d:1.05s"><span class="yr">2010</span><p>Global Greening begins — landmarks worldwide light up green.</p></div>
+      <div class="tl-item" data-anim="rise" style="--d:1.2s"><span class="yr">Today</span><p>Celebrated in more than 100 countries.</p></div>
+    </div>
+    <div class="polaroids" data-anim="drop" style="--d:.5s">
+      <figure class="pol floaty" style="--fr:-3deg;left:8%;top:6%">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/St._Patrick%27s_Day_Dance_%26_Celebration_in_Ireland_1942-03-17.jpg?width=800" alt="An Irish céilí dance in 1942" loading="lazy" decoding="async">
+        <figcaption>Party like it's 1942 — a céilí in full swing.</figcaption>
+      </figure>
+      <figure class="pol small floaty" style="--fr:4deg;right:0;bottom:2%;animation-delay:.8s">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Saint_patrick%27s_day_2013,Dublin,_Images_from_the_streets_05.jpg?width=600" alt="Dublin streets on St Patrick's Day 2013" loading="lazy" decoding="async">
+        <figcaption>Dublin, 2013.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- 13 · FIRST PARADE + POSTCARD -->
+<section class="slide" data-theme="cream" data-name="First Parade" data-fx="wipe">
+  <div class="ghost" data-depth="6">13</div>
+  <div class="split">
+    <div>
+      <div class="kicker" data-anim="left" data-scramble>The First Parade</div>
+      <h2><span data-split>It started in </span><em class="uu" data-anim="fade" style="--d:.45s">Florida.<svg viewBox="0 0 120 12" preserveAspectRatio="none" aria-hidden="true"><path d="M3 8 Q 22 3 42 7 T 82 6 T 117 7"/></svg></em></h2>
+      <p class="lead dc" data-anim="rise" style="--d:.3s">The earliest recorded St. Patrick's Day parade was not in Ireland or New York. It took place in 1601 in the Spanish colony of St. Augustine, Florida, led by an Irish vicar.</p>
+      <div class="stats" style="grid-template-columns:repeat(3,1fr)">
+        <div class="stat" data-anim="rise" style="--d:.5s"><div class="num" data-count="1601"></div><div class="lb">Year of the first parade</div></div>
+        <div class="stat" data-anim="rise" style="--d:.65s"><div class="num">Florida</div><div class="lb">St. Augustine</div></div>
+        <div class="stat" data-anim="rise" style="--d:.8s"><div class="num">Irish vicar</div><div class="lb">Who organized it</div></div>
+      </div>
+      <div class="foot" data-anim="fade" style="--d:.95s">Source: Florida colonial records · History.com</div>
+    </div>
+    <div data-anim="zoom" style="--d:.35s">
+      <div class="pc-wrap">
+        <div class="frame tape" style="transform:rotate(-2deg);background:#fff;padding:14px 14px 20px">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/%22St._Patrick%27s_Day_in_the_Morning.%22.jpg?width=800" alt="Illustrated St Patrick's Day postcard from 1908" loading="lazy" decoding="async" style="filter:sepia(.2) saturate(1.15)">
+          <p class="cap" style="color:#5a6a5e">An illustrated St. Patrick's Day card from 1908. Public domain.</p>
+        </div>
+        <div class="postmark" data-anim="drop" style="--d:1s">St. Augustine<br>★ 1601 ★<br>17 March</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 14 · NYC PARADE -->
+<section class="slide" data-theme="dark" data-name="New York" data-fx="slider">
+  <div class="ghost" data-depth="6">14</div>
+  <div class="kicker" data-anim="left" data-scramble>The World's Biggest</div>
+  <h2 data-split>New York's giant parade.</h2>
+  <div class="stats" style="margin-top:6px">
+    <div class="stat" data-anim="rise" style="--d:.3s"><div class="num" data-count="1762"></div><div class="lb">Year the first NYC parade marched</div></div>
+    <div class="stat" data-anim="rise" style="--d:.45s"><div class="num" data-count="150000" data-suffix="+"></div><div class="lb">Marchers on Fifth Avenue each year</div></div>
+    <div class="stat" data-anim="rise" style="--d:.6s"><div class="num" data-count="2" data-suffix=" million"></div><div class="lb">Spectators along the route</div></div>
+    <div class="stat" data-anim="rise" style="--d:.75s"><div class="num" data-count="0"></div><div class="lb">Floats or vehicles — marching only</div></div>
+  </div>
+  <div class="pcs">
+    <figure class="pc" style="--r:-5deg;--d:.6s;left:2%;top:10px"><span class="pin"></span><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Saint_patrick%27s_day_2013,Dublin,_Images_from_the_streets_01.jpg?width=900" alt="Crowds in green celebrating" loading="lazy" decoding="async"><figcaption>Crowds in green</figcaption></figure>
+    <figure class="pc" style="--r:3deg;--d:.75s;left:27%;top:50px"><span class="pin"></span><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Saint_Patrick%27s_Day_in_Cork,_2024._Images_from_the_Celebration_02.jpg?width=900" alt="Celebration in Cork" loading="lazy" decoding="async"><figcaption>Street celebration</figcaption></figure>
+    <figure class="pc" style="--r:-2deg;--d:.9s;left:51%;top:8px"><span class="pin"></span><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Parade_in_Cork_City_-_Irish_Flag_in_foreground.jpg?width=900" alt="Irish tricolour flag at a parade" loading="lazy" decoding="async"><figcaption>The tricolour flies</figcaption></figure>
+    <figure class="pc" style="--r:6deg;--d:1.05s;left:74%;top:55px"><span class="pin"></span><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Saint_patrick%27s_day_2013,Dublin,_Images_from_the_streets_04.jpg?width=900" alt="Street performers" loading="lazy" decoding="async"><figcaption>Street performers</figcaption></figure>
+  </div>
+</section>
+
+<!-- 15 · DUBLIN FESTIVAL -->
+<section class="slide" data-theme="cream" data-name="Dublin" data-fx="flash">
+  <div class="ghost" data-depth="6">15</div>
+  <div class="split">
+    <div>
+      <div class="kicker" data-anim="left" data-scramble>Dublin's Festival</div>
+      <h2 data-split>Five days of celebration.</h2>
+      <p class="lead dc" data-anim="rise" style="--d:.3s">Since 1996, Dublin has turned the single day into a full festival. It draws hundreds of thousands of visitors with music, theatre, and a grand parade through the city center.</p>
+      <div class="stats" style="grid-template-columns:repeat(2,1fr)">
+        <div class="stat" data-anim="rise" style="--d:.5s"><div class="num" data-count="5"></div><div class="lb">Days of festival events</div></div>
+        <div class="stat" data-anim="rise" style="--d:.65s"><div class="num" data-count="500" data-suffix="k"></div><div class="lb">Visitors to Dublin each year</div></div>
+      </div>
+    </div>
+    <div data-anim="zoom" style="--d:.35s">
+      <div class="vidframe">
+        <span class="reel">Live Loop</span>
+        <video muted loop playsinline preload="metadata" src="https://commons.wikimedia.org/wiki/Special:FilePath/PXL_20240317_111603131.TS.webm"></video>
+        <p class="vidcap">Dancers on a parade float, March 2024. Lucy Moore, CC BY-SA 4.0.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 16 · CHICAGO RIVER -->
+<section class="slide" data-theme="dark" id="s16" data-name="Green River" data-fx="zoom">
+  <div class="bg kb"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Green_Chicago_River_on_Saint_Patricks_Day_2009.jpg?width=2000" alt="Panorama of the Chicago River dyed green" loading="lazy" decoding="async"></div>
+  <div class="panelbox">
+    <div class="kicker" data-anim="left" data-scramble>Chicago's Emerald River</div>
+    <h2><span data-split>They turn the river </span><em class="uu" data-anim="fade" style="--d:.45s">green.<svg viewBox="0 0 120 12" preserveAspectRatio="none" aria-hidden="true"><path d="M3 8 Q 22 3 42 7 T 82 6 T 117 7"/></svg></em></h2>
+    <div class="vidframe" data-anim="zoom" style="--d:.3s;margin-bottom:18px">
+      <span class="reel">Real Footage</span>
+      <iframe src="https://www.youtube-nocookie.com/embed/PvU40piXOts?rel=0" title="Chicago River dyed green — 4K timelapse" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <p class="vidcap">The dyeing in under two minutes. Footage: PrimoMedia, 2017.</p>
+    </div>
+    <div class="factline" data-anim="rise" style="--d:.5s"><span class="n">01</span><p>The dye started as a <b>plumbers' leak-tracing powder</b>. Orange in dry form, it turns vivid green in water.</p></div>
+    <div class="factline" data-anim="rise" style="--d:.65s"><span class="n">02</span><p>Two boats deploy it — one drops, one stirs. The recipe is a guarded secret.</p></div>
+    <div class="strip">
+      <figure data-anim="rise" style="--d:.8s"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Bagpipers_on_Chicago_River,_St_Patrick%27s_Day_2015.jpg?width=700" alt="Bagpipers beside the green river" loading="lazy" decoding="async"><figcaption>Bagpipers, 2015</figcaption></figure>
+      <figure data-anim="rise" style="--d:.95s"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Riverwalk_full_of_people_dressed_in_green_(6844843694).jpg?width=700" alt="Crowds in green along the riverwalk" loading="lazy" decoding="async"><figcaption>Riverwalk crowds</figcaption></figure>
+      <figure data-anim="rise" style="--d:1.1s"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Chicago_River,_dye_travelling_upstream.jpg?width=700" alt="Green dye travelling upstream" loading="lazy" decoding="async"><figcaption>The dye spreads</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 17 · GLOBAL GREENING -->
+<section class="slide" data-theme="green" data-name="Greening" data-fx="iris">
+  <div class="ghost" data-depth="6">17</div>
+  <div class="split">
+    <div>
+      <div class="kicker" data-anim="left" data-scramble>Part Four · The Living Tradition</div>
+      <h2 data-split>The world turns green.</h2>
+      <p class="lead" data-anim="rise" style="--d:.3s">Since 2010, Tourism Ireland has invited landmarks around the world to light up green on the evening of March 17. Hundreds of sites now take part.</p>
+      <div class="chips">
+        <span class="chip" data-anim="pop" style="--d:.5s">Sydney Opera House</span>
+        <span class="chip" data-anim="pop" style="--d:.57s">London Eye</span>
+        <span class="chip" data-anim="pop" style="--d:.64s">Niagara Falls</span>
+        <span class="chip" data-anim="pop" style="--d:.71s">The Colosseum</span>
+        <span class="chip" data-anim="pop" style="--d:.78s">Leaning Tower of Pisa</span>
+        <span class="chip" data-anim="pop" style="--d:.85s">Burj Al Arab</span>
+        <span class="chip" data-anim="pop" style="--d:.92s">Table Mountain</span>
+        <span class="chip" data-anim="pop" style="--d:.99s">Empire State Building</span>
+        <span class="chip" data-anim="pop" style="--d:1.06s">Christ the Redeemer</span>
+      </div>
+    </div>
+    <div data-anim="zoom" style="--d:.35s">
+      <div class="frame kb reveal" style="height:min(52vh,460px)">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Sydney_Opera_House_on_St._Patrick%27s_Day_(41260243671).jpg?width=1600" alt="Sydney Opera House illuminated green" loading="lazy" decoding="async">
+      </div>
+      <p class="cap">Sydney Opera House, March 17, 2018. Photo: Wikimedia Commons (CC).</p>
+    </div>
+  </div>
+</section>
+
+<!-- 18 · FOOD (portrait pint frame) -->
+<section class="slide" data-theme="cream" data-name="A Feast" data-fx="gate">
+  <div class="ghost" data-depth="6">18</div>
+  <div class="split">
+    <div>
+      <div class="kicker" data-anim="left" data-scramble>Food and Drink</div>
+      <h2><span data-split>Eat like the </span><em class="uu" data-anim="fade" style="--d:.45s">Irish.<svg viewBox="0 0 120 12" preserveAspectRatio="none" aria-hidden="true"><path d="M3 8 Q 22 3 42 7 T 82 6 T 117 7"/></svg></em></h2>
+      <p class="lead dc" data-anim="rise" style="--d:.3s">Corned beef and cabbage is actually an Irish-American invention. In Ireland, the traditional dishes are soda bread, colcannon, boxty, and slow-cooked stew.</p>
+      <div class="chips" style="max-width:none">
+        <span class="chip" data-anim="pop" style="--d:.5s">Corned Beef</span>
+        <span class="chip" data-anim="pop" style="--d:.6s">Soda Bread</span>
+        <span class="chip" data-anim="pop" style="--d:.7s">Colcannon</span>
+        <span class="chip" data-anim="pop" style="--d:.8s">Boxty</span>
+        <span class="chip" data-anim="pop" style="--d:.9s">Irish Stew</span>
+        <span class="chip" data-anim="pop" style="--d:1s">Guinness</span>
+      </div>
+      <div class="stats" style="grid-template-columns:repeat(2,1fr)">
+        <div class="stat" data-anim="rise" style="--d:1.1s"><div class="num" data-count="13" data-suffix=" million"></div><div class="lb">Pints of Guinness on March 17</div></div>
+        <div class="stat" data-anim="rise" style="--d:1.25s"><div class="num" data-count="119" data-suffix=" sec"></div><div class="lb">The perfect pour time</div></div>
+      </div>
+    </div>
+    <div data-anim="zoom" style="--d:.35s">
+      <div class="frame tape kb reveal" style="height:min(56vh,520px);max-width:360px;margin-left:auto">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/A_pint_of_Guinness.jpg?width=800" alt="A perfectly poured pint of Guinness" loading="lazy" decoding="async" style="object-position:50% 40%">
+      </div>
+      <p class="cap" style="max-width:360px;margin-left:auto">The perfect pour. Photo: Wikimedia Commons.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 19 · PHRASES -->
+<section class="slide" data-theme="dark" data-name="Speak Irish" data-fx="wave">
+  <div class="ghost" data-depth="6">19</div>
+  <div class="split" style="grid-template-columns:1.15fr .85fr;align-items:start">
+    <div>
+      <div class="kicker" data-anim="left" data-scramble>Speak Like a Local</div>
+      <h2 data-split>Four phrases to know.</h2>
+      <p class="lead" data-anim="rise" style="--d:.3s">Hover or tap each card to see how it's said. The Irish language is over a thousand years old.</p>
+      <div class="flips">
+        <div class="flip" data-anim="flip" style="--d:.5s" tabindex="0"><div class="flip-in"><div class="face fr"><div class="g">Sláinte!</div><small>hover / tap</small></div><div class="face bk"><div class="p">"SLAWN-cha"</div><div class="m">Health! The universal toast.</div></div></div></div>
+        <div class="flip" data-anim="flip" style="--d:.65s" tabindex="0"><div class="flip-in"><div class="face fr"><div class="g">Fáilte!</div><small>hover / tap</small></div><div class="face bk"><div class="p">"FWAL-cha"</div><div class="m">Welcome! Come in.</div></div></div></div>
+        <div class="flip" data-anim="flip" style="--d:.8s" tabindex="0"><div class="flip-in"><div class="face fr"><div class="g">Éirinn go brách!</div><small>hover / tap</small></div><div class="face bk"><div class="p">"AIR-in guh BRAWKH"</div><div class="m">Ireland forever.</div></div></div></div>
+        <div class="flip" data-anim="flip" style="--d:.95s" tabindex="0"><div class="flip-in"><div class="face fr"><div class="g">Céad míle fáilte!</div><small>hover / tap</small></div><div class="face bk"><div class="p">"KAYD MEE-le FWAL-cha"</div><div class="m">A hundred thousand welcomes.</div></div></div></div>
+      </div>
+    </div>
+    <div data-anim="right" style="--d:.45s">
+      <figure class="pol-solo floaty" style="--fr:3deg">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Joyful_moments_on_street.jpg?width=700" alt="Joyful moments on the street during a St Patrick's Day celebration" loading="lazy" decoding="async">
+        <figcaption>Joy in the streets — the language lives in celebration.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- 20 · FINALE -->
+<section class="slide" data-theme="dark" id="s20" data-name="Sláinte" data-fx="scalefade" data-confetti>
+  <div class="kicker" data-anim="fade" style="justify-content:center">The End · Go n-éirí an t-ádh leat</div>
+  <h2 class="unq" data-split>Sláinte!</h2>
+  <p class="joke" data-anim="rise" style="--d:.6s">Wear something green today. And say his name correctly — it is Saint <b>PATRICK's</b> Day. Not Patty's. Paddy's is fine. Patty's is not.</p>
+  <button id="replay" data-anim="rise" style="--d:.8s">↺  Start Over</button>
+  <div class="credits" data-anim="fade" style="--d:1s">
+    <span>PHOTOGRAPHS — Real, human-taken, freely licensed via Wikimedia Commons. Snake photo: Commons Picture of the Day, 5 May 2010.</span>
+    <span>FOOTAGE — Chicago River timelapse: PrimoMedia (YouTube, 2017). Parade loop: Lucy Moore, CC BY-SA 4.0.</span>
+    <span>FACTS — Britannica · History.com · NBC Chicago · RTÉ · Tourism Ireland.</span>
+    <span>BUILT BY HAND — Single HTML file. Vanilla JavaScript. Zero AI imagery. Zero frameworks.</span>
+  </div>
+  <div class="mq" aria-hidden="true"><div class="mq-track"><span>SLÁINTE ✦ THANK YOU FOR WATCHING ✦ WEAR GREEN ✦ BE KIND ✦ SEE YOU NEXT MARCH ✦</span><span>SLÁINTE ✦ THANK YOU FOR WATCHING ✦ WEAR GREEN ✦ BE KIND ✦ SEE YOU NEXT MARCH ✦</span></div></div>
+</section>
+
+</main>
+
+<script>
+(function(){
+"use strict";
+var $=function(s){return document.querySelector(s)},$$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
+var REDUCE=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+$$("[data-split]").forEach(function(el){
+  var words=el.textContent.trim().split(/\s+/),i=0;
+  el.textContent="";
+  words.forEach(function(w,wi){
+    var ws=document.createElement("span");ws.className="w";
+    w.split("").forEach(function(c){
+      var s=document.createElement("span");s.className="ch";s.style.setProperty("--i",i++);s.textContent=c;ws.appendChild(s);
+    });
+    el.appendChild(ws);
+    if(wi<words.length-1)el.appendChild(document.createTextNode(" "));
+  });
+});
+
+var slides=$$(".slide"),N=slides.length,idx=0,busy=true;
+var curtain=$("#curtain"),wiper=$("#wiper"),gate=$("#gate"),slats=$("#slats"),flashfx=$("#flashfx");
+var bar=$("#bar"),dots=$("#dots"),hint=$("#hint");
+var cNow=$("#cNow"),ringC=$("#ringC"),RC=2*Math.PI*28;
+ringC.style.strokeDasharray=RC;ringC.style.strokeDashoffset=RC;
+
+slides.forEach(function(s,i){
+  var b=document.createElement("button");
+  b.setAttribute("aria-label","Slide "+(i+1)+": "+(s.dataset.name||""));
+  b.innerHTML="<span>"+(s.dataset.name||("Slide "+(i+1)))+"</span>";
+  b.addEventListener("click",function(){go(i)});
+  dots.appendChild(b);
+});
+var dotBtns=$$("#dots button");
+
+function chrome(){
+  cNow.textContent=("0"+(idx+1)).slice(-2);
+  ringC.style.strokeDashoffset=RC*(1-(idx+1)/N);
+  bar.style.width=((idx+1)/N*100)+"%";
+  dotBtns.forEach(function(d,i){d.classList.toggle("on",i===idx)});
+}
+function runCounters(sl){
+  sl.querySelectorAll("[data-count]").forEach(function(el){
+    if(el.dataset.done)return;el.dataset.done="1";
+    var t=+el.dataset.count,suf=el.dataset.suffix||"",st=performance.now(),dur=1900;
+    (function f(now){
+      var p=Math.min(1,(now-st)/dur),e=1-Math.pow(1-p,4);
+      el.textContent=Math.round(t*e).toLocaleString("en-US")+suf;
+      if(p<1)requestAnimationFrame(f);
+    })(st);
+  });
+}
+function pauseAllVideos(){slides.forEach(function(s){s.querySelectorAll("video").forEach(function(v){v.pause()})})}
+function playVideos(sl){sl.querySelectorAll("video").forEach(function(v){v.play().catch(function(){})})}
+
+var POOL="ABCDEFGHLMNPRST✦*";
+function scramble(el){
+  if(el.dataset.sdone)return;el.dataset.sdone="1";
+  var orig=el.textContent,f=0,need=orig.length;
+  var iv=setInterval(function(){
+    f++;
+    el.textContent=orig.split("").map(function(c,i){
+      if(c===" ")return" ";
+      return(i<f/2.2)?c:POOL[(Math.random()*POOL.length)|0];
+    }).join("");
+    if(f/2.2>=need){clearInterval(iv);el.textContent=orig;}
+  },28);
+}
+function scrambleAll(sl){sl.querySelectorAll("[data-scramble]").forEach(scramble)}
+
+function activateEffects(sl){
+  runCounters(sl);pauseAllVideos();playVideos(sl);scrambleAll(sl);
+  if(sl.hasAttribute("data-confetti")&&!REDUCE){
+    setTimeout(function(){burst(innerWidth/2,innerHeight*.32,170)},400);
+  }
+}
+function show(n){
+  idx=n;
+  slides.forEach(function(s){s.classList.remove("is-active")});
+  slides[n].classList.add("is-active");
+  activateEffects(slides[n]);chrome();
+}
+
+var OVT={wipe:[440,1120],gate:[640,1300],slats:[740,1440],blinds:[740,1540],flash:[120,680]};
+var CLT={iris:1100,lift:1050,wave:1200,zoom:1000,spin:1000,flip:1050,slider:1000,scalefade:1100};
+
+function go(n){
+  n=((n%N)+N)%N;
+  if(busy||n===idx)return;
+  busy=true;hint.classList.add("gone");
+  var fx=slides[n].dataset.fx||"lift";
+
+  if(OVT[fx]){
+    var mid=OVT[fx][0],end=OVT[fx][1];
+    if(fx==="wipe")wiper.classList.add("go");
+    else if(fx==="gate")gate.classList.add("cover");
+    else if(fx==="slats")slats.classList.add("cover");
+    else if(fx==="blinds"){curtain.classList.remove("snap","reveal");void curtain.offsetWidth;curtain.classList.add("cover")}
+    else if(fx==="flash")flashfx.classList.add("go");
+    setTimeout(function(){
+      if(fx==="flash")slides[n].classList.add("enter-pop");
+      show(n);
+    },mid);
+    setTimeout(function(){
+      if(fx==="wipe"){wiper.classList.add("snap");wiper.classList.remove("go");void wiper.offsetWidth;wiper.classList.remove("snap")}
+      else if(fx==="gate")gate.classList.remove("cover");
+      else if(fx==="slats")slats.classList.remove("cover");
+      else if(fx==="blinds"){curtain.classList.add("reveal");setTimeout(function(){curtain.classList.add("snap");curtain.classList.remove("cover","reveal");void curtain.offsetWidth;curtain.classList.remove("snap")},840)}
+      else if(fx==="flash"){flashfx.classList.add("snap");flashfx.classList.remove("go");void flashfx.offsetWidth;flashfx.classList.remove("snap");setTimeout(function(){slides[n].classList.remove("enter-pop")},540)}
+      busy=false;
+    },end);
+    return;
+  }
+
+  var nw=slides[n],o=slides[idx];
+  nw.classList.add("is-active","enter-"+fx);
+  o.classList.add("is-exit","exit-"+fx);
+  idx=n;activateEffects(nw);chrome();
+  setTimeout(function(){
+    o.classList.remove("is-active","is-exit","exit-"+fx);
+    nw.classList.remove("enter-"+fx);
+    busy=false;
+  },CLT[fx]||1000);
+}
+
+$("#prev").addEventListener("click",function(){go(idx-1)});
+$("#next").addEventListener("click",function(){go(idx+1)});
+$("#replay").addEventListener("click",function(){go(0)});
+
+$$("#ctrl button").forEach(function(b){
+  b.addEventListener("pointermove",function(e){
+    var r=b.getBoundingClientRect();
+    var x=(e.clientX-r.left-r.width/2)/r.width,y=(e.clientY-r.top-r.height/2)/r.height;
+    b.style.transform="translate("+(x*7).toFixed(1)+"px,"+(y*7).toFixed(1)+"px)";
+  });
+  b.addEventListener("pointerleave",function(){b.style.transform=""});
+});
+
+addEventListener("keydown",function(e){
+  if(e.key==="ArrowRight"||e.key==="ArrowDown"||e.key==="PageDown"){e.preventDefault();go(idx+1)}
+  else if(e.key==="ArrowLeft"||e.key==="ArrowUp"||e.key==="PageUp"){e.preventDefault();go(idx-1)}
+  else if(e.key==="Home")go(0);
+  else if(e.key==="End")go(N-1);
+  else if(e.key==="f"||e.key==="F")document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();
+});
+
+$$(".flip").forEach(function(f){
+  f.addEventListener("click",function(){f.classList.toggle("on")});
+  f.addEventListener("keydown",function(e){if(e.key==="Enter")f.classList.toggle("on")});
+});
+
+$$(".frame").forEach(function(f){
+  var base=f.style.transform||"";
+  f.addEventListener("pointermove",function(e){
+    var r=f.getBoundingClientRect();
+    var x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    f.style.transform=base+" perspective(950px) rotateY("+(x*6).toFixed(2)+"deg) rotateX("+(-y*6).toFixed(2)+"deg)";
+  });
+  f.addEventListener("pointerleave",function(){f.style.transform=base});
+});
+
+var depths=$$("[data-depth]"),mx=0,my=0,cmx=0,cmy=0;
+addEventListener("pointermove",function(e){mx=(e.clientX/innerWidth-.5)*2;my=(e.clientY/innerHeight-.5)*2});
+(function ploop(){
+  cmx+=(mx-cmx)*.055;cmy+=(my-cmy)*.055;
+  depths.forEach(function(el){var d=+el.dataset.depth;el.style.translate=(cmx*d)+"px "+(cmy*d)+"px"});
+  requestAnimationFrame(ploop);
+})();
+
+var cv=$("#fx"),cx=cv.getContext("2d"),parts=[],sparks=[],conf=[];
+function resize(){cv.width=innerWidth*devicePixelRatio;cv.height=innerHeight*devicePixelRatio;cv.style.width=innerWidth+"px";cv.style.height=innerHeight+"px";cx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0)}
+resize();addEventListener("resize",resize);
+var GREENS=["47,191,113","22,155,98","18,120,72"],GOLD="212,175,55";
+for(var i=0;i<40;i++)parts.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,s:4+Math.random()*12,r:Math.random()*6.28,vr:(Math.random()-.5)*.01,vy:.12+Math.random()*.35,vx:(Math.random()-.5)*.2,a:.04+Math.random()*.12,c:Math.random()<.13?GOLD:GREENS[(Math.random()*3)|0]});
+for(var j=0;j<28;j++)sparks.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:.5+Math.random()*1.5,p:Math.random()*6.28,sp:.015+Math.random()*.03});
+
+function drawShamrock(x,y,s,rot,col,alpha){
+  cx.save();cx.translate(x,y);cx.rotate(rot);cx.globalAlpha=alpha;cx.fillStyle="rgba("+col+",1)";
+  for(var k=0;k<3;k++){cx.save();cx.rotate(k*2.094);cx.beginPath();cx.moveTo(0,0);cx.bezierCurveTo(s*.55,-s*.12,s*.6,-s*.8,0,-s*.66);cx.bezierCurveTo(-s*.6,-s*.8,-s*.55,-s*.12,0,0);cx.fill();cx.restore()}
+  cx.strokeStyle="rgba("+col+",1)";cx.lineWidth=s*.13;cx.beginPath();cx.moveTo(0,0);cx.quadraticCurveTo(s*.17,s*.5,s*.05,s*.82);cx.stroke();cx.restore();
+}
+function burst(x,y,n){
+  for(var i=0;i<n;i++){
+    var a=Math.random()*6.28,sp=2.5+Math.random()*7;
+    conf.push({x:x,y:y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-2.5,g:.15,s:3+Math.random()*8,r:Math.random()*6.28,vr:(Math.random()-.5)*.28,life:1,c:Math.random()<.22?GOLD:(Math.random()<.14?"255,139,61":GREENS[(Math.random()*3)|0]),t:Math.random()<.5?0:1});
+  }
+}
+addEventListener("pointerdown",function(e){
+  if(e.target.closest("a,button,iframe,video,.flip,#dots,#ctrl"))return;
+  if(!REDUCE)burst(e.clientX,e.clientY,20);
+});
+(function loop(){
+  cx.clearRect(0,0,innerWidth,innerHeight);
+  if(!REDUCE){
+    sparks.forEach(function(s){
+      s.p+=s.sp;
+      var a=.15+.45*Math.abs(Math.sin(s.p));
+      cx.globalAlpha=a;cx.fillStyle="rgba("+GOLD+",1)";
+      cx.beginPath();cx.arc(s.x,s.y,s.r,0,6.28);cx.fill();
+    });
+    cx.globalAlpha=1;
+    parts.forEach(function(p){
+      p.y-=p.vy;p.x+=p.vx+Math.sin(p.y*.009)*.25;p.r+=p.vr;
+      if(p.y<-30){p.y=innerHeight+30;p.x=Math.random()*innerWidth}
+      drawShamrock(p.x,p.y,p.s,p.r,p.c,p.a);
+    });
+    for(var i=conf.length-1;i>=0;i--){
+      var c=conf[i];c.vy+=c.g;c.vx*=.99;c.vy*=.99;c.x+=c.vx;c.y+=c.vy;c.r+=c.vr;c.life-=.007;
+      if(c.life<=0||c.y>innerHeight+40){conf.splice(i,1);continue}
+      if(c.t===0)drawShamrock(c.x,c.y,c.s,c.r,c.c,c.life);
+      else{cx.save();cx.translate(c.x,c.y);cx.rotate(c.r);cx.globalAlpha=c.life;cx.fillStyle="rgba("+c.c+",1)";cx.fillRect(-c.s/2,-c.s/4,c.s,c.s/2);cx.restore()}
+    }
+  }
+  requestAnimationFrame(loop);
+})();
+
+var pct=$("#pct"),p=0,loaded=(document.readyState==="complete");
+addEventListener("load",function(){loaded=true});
+var li=setInterval(function(){
+  p+=loaded?6+Math.random()*9:2+Math.random()*5;
+  if(p>=100){
+    p=100;clearInterval(li);pct.textContent="100";
+    setTimeout(function(){
+      $("#load").classList.add("done");
+      show(0);slides[0].classList.add("enter-iris");
+      setTimeout(function(){slides[0].classList.remove("enter-iris");busy=false},1150);
+    },440);
+  }else pct.textContent=Math.floor(p);
+},70);
+setTimeout(function(){if(p<100)p=100},6000);
+chrome();
+})();
+</script>
+</body>
+</html>
